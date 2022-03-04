@@ -51,15 +51,6 @@ const timerFunc = (deadLine) => {
     timerHours.textContent = noneZero(getTime.hours);
     timerMinutes.textContent = noneZero(getTime.minutes);
     timerSeconds.textContent = noneZero(getTime.seconds);
-
-    // if (getTime.timeRemaining > 0) {
-    //   setTimeout(upDateClock, 1000);
-    // } else {
-    //   timerDays.textContent = '00';
-    //   timerHours.textContent = '00';
-    //   timerMinutes.textContent = '00';
-    //   timerSeconds.textContent = '00';
-    // }
   };
 
 
