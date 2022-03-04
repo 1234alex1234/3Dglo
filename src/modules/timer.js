@@ -1,11 +1,13 @@
-const timerFunc = () => {
+"use strick";
+
+const timerFunc = (deadLine) => {
   const timerNumbers = document.querySelector('.timer-numbers');
   const timerHours = document.querySelector('#timer-hours');
   const timerMinutes = document.querySelector('#timer-minutes');
   const timerSeconds = document.querySelector('#timer-seconds');
   let timerDays = document.querySelector('#timer-day');
 
-  const getTimeRemaining = (deadLine) => {
+  const getTimeRemaining = () => {
     timerDays = document.querySelector('#timer-day');
 
     let dateStop = new Date(deadLine).getTime();
@@ -37,7 +39,7 @@ const timerFunc = () => {
   const daysNumber = () => {
     let span = document.createElement('span');
     span.id = 'timer-day';
-    span.textContent = '00' + ' :';
+    span.textContent = '00' + ' дней ';
     timerNumbers.prepend(span);
   };
 
@@ -45,23 +47,33 @@ const timerFunc = () => {
   const upDateClock = () => {
     let getTime = getTimeRemaining('15 march 2022');
 
-    timerDays.textContent = noneZero(getTime.days + ' :');
+    timerDays.textContent = noneZero(getTime.days + ' дней ');
     timerHours.textContent = noneZero(getTime.hours);
     timerMinutes.textContent = noneZero(getTime.minutes);
     timerSeconds.textContent = noneZero(getTime.seconds);
 
-    if (getTime.timeRemaining > 0) {
-      setTimeout(upDateClock, 1000);
-    } else {
-      timerDays.textContent = '00';
-      timerHours.textContent = '00';
-      timerMinutes.textContent = '00';
-      timerSeconds.textContent = '00';
-    }
+    // if (getTime.timeRemaining > 0) {
+    //   setTimeout(upDateClock, 1000);
+    // } else {
+    //   timerDays.textContent = '00';
+    //   timerHours.textContent = '00';
+    //   timerMinutes.textContent = '00';
+    //   timerSeconds.textContent = '00';
+    // }
   };
 
+
   daysNumber();
-  upDateClock();
+  let getTime = getTimeRemaining();
+  if (getTime.timeRemaining > 0) {
+    setInterval(upDateClock, 1000);
+  } else {
+    timerDays.textContent = '00';
+    timerHours.textContent = '00';
+    timerMinutes.textContent = '00';
+    timerSeconds.textContent = '00';
+  }
+
 };
 
 export default timerFunc;
