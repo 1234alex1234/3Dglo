@@ -29,7 +29,6 @@ const menuFunc = () => {
       });
     });
   });
-
 };
 
 export default menuFunc;
