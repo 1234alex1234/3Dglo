@@ -12,7 +12,7 @@ const modalFunc = () => {
     const documentWidth = document.documentElement.clientWidth;
     const popupContentWidth = popupContent.clientWidth;
 
-    count++;
+    count += 5;
     idInterval = requestAnimationFrame(popupAnimation);
 
     if (count < ((documentWidth / 2) - (popupContentWidth / 2)) / 5) {
@@ -21,7 +21,6 @@ const modalFunc = () => {
       cancelAnimationFrame(idInterval);
       count = 0;
     }
-
   };
 
   popupBtns.forEach(btn => {
@@ -34,8 +33,6 @@ const modalFunc = () => {
   popupClose.addEventListener("click", () => {
     modal.style.display = 'none';
   });
-
-
 };
 
 export default modalFunc;
