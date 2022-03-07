@@ -3,13 +3,7 @@ const menuFunc = () => {
   const menuBtn = document.querySelector(".menu");
   const menu = document.querySelector('menu');
   const menuLinks = menu.querySelectorAll('ul>li>a');
-  const closeBtn = document.querySelector('.close-btn');
   const serviceLink = document.querySelector('a[href="#service-block"]');
-
-  const handleMenu = (e) => {
-    e.preventDefault();
-    menu.classList.toggle('active-menu');
-  };
 
   function blockScroll(e) {
 
@@ -23,15 +17,26 @@ const menuFunc = () => {
       behavior: 'smooth',
       block: 'start'
     });
+  }
+
+  const toggleMenu = (e) => {
+    e.preventDefault();
+
+    if (e.target.closest('.menu')) {
+      menu.classList.toggle('active-menu');
+    }
+
+    if (e.target.classList.contains('close-btn') || (!e.target.closest('.menu'))) {
+      menu.classList.remove('active-menu');
+    }
   };
 
-  menuBtn.addEventListener("click", handleMenu);
-  closeBtn.addEventListener("click", handleMenu);
+  document.addEventListener("click", toggleMenu);
+
   serviceLink.addEventListener("click", blockScroll);
 
   menuLinks.forEach(menuLink => {
 
-    menuLink.addEventListener("click", handleMenu);
     menuLink.addEventListener("click", blockScroll);
 
   });

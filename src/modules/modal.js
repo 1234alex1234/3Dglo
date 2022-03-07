@@ -1,7 +1,6 @@
 const modalFunc = () => {
 
   const modal = document.querySelector('.popup');
-  const popupClose = modal.querySelector('.popup-close');
   const popupBtns = document.querySelectorAll('.popup-btn');
   const popupContent = modal.querySelector('.popup-content');
 
@@ -30,9 +29,13 @@ const modalFunc = () => {
     });
   });
 
-  popupClose.addEventListener("click", () => {
-    modal.style.display = 'none';
-  });
+  const handlePopup = (e) => {
+    if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+      modal.style.display = 'none';
+    }
+  };
+
+  modal.addEventListener("click", handlePopup);
 };
 
 export default modalFunc;
