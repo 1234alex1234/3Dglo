@@ -15,7 +15,7 @@ const modalFunc = () => {
     idInterval = requestAnimationFrame(popupAnimation);
 
     if (count < ((documentWidth / 2) - (popupContentWidth / 2)) / 5) {
-      popupContent.style.left = count * 5 + 'px';
+      popupContent.style.left = count * 5.5 + 'px';
     } else {
       cancelAnimationFrame(idInterval);
       count = 0;
