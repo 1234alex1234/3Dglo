@@ -1,31 +1,32 @@
+import {
+  animate
+} from './helpers';
+
 const modalFunc = () => {
 
   const modal = document.querySelector('.popup');
   const popupBtns = document.querySelectorAll('.popup-btn');
-  const popupContent = modal.querySelector('.popup-content');
-
-  let count = 0;
-  let idInterval;
-
-  const popupAnimation = () => {
-    const documentWidth = document.documentElement.clientWidth;
-    const popupContentWidth = popupContent.clientWidth;
-
-    count += 5;
-    idInterval = requestAnimationFrame(popupAnimation);
-
-    if (count < ((documentWidth / 2) - (popupContentWidth / 2)) / 5) {
-      popupContent.style.left = count * 5.5 + 'px';
-    } else {
-      cancelAnimationFrame(idInterval);
-      count = 0;
-    }
-  };
+  let popupContent = modal.querySelector('.popup-content');
 
   popupBtns.forEach(btn => {
+    const documentWidth = document.documentElement.clientWidth;
+
     btn.addEventListener("click", () => {
+      const popupContentWidth = popupContent.clientWidth;
+      console.log(popupContentWidth);
+
+
       modal.style.display = 'block';
-      popupAnimation();
+
+      animate({
+        duration: 1000,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          popupContent.style.left = (documentWidth / 2 - 150) * progress + 'px';
+        }
+      });
     });
   });
 
