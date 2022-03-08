@@ -5,75 +5,45 @@ const regexFunc = () => {
 
   mainForms.forEach((mainForm) => {
 
-    mainForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+    mainForm.addEventListener("input", function (e) {
 
-      let isError = false;
       const inputText = this.querySelector('input[type=text]');
       const inputEmail = this.querySelector('input[type=email]');
       const inputTel = this.querySelector('input[type=tel]');
 
-      if (!/[^а-яА-Я\-]/gi.test(inputText.value) && inputText.value !== '') {
-
-      } else {
-        alert("Ввод неверный!");
-        isError = true;
+      if (e.target == inputText) {
+        e.target.value = e.target.value.replace(/[^а-яА-Я\-' ']/gi, "");
       }
 
-      if (/\w+@([\w]+\.)[\w]+/gi.test(inputEmail.value)) {
-
-      } else {
-        alert("Email неверный!");
-        isError = true;
+      if (e.target == inputEmail) {
+        e.target.value = e.target.value.replace(/[^\w\@-_.!~*']+/, "");
       }
 
-      if (!/[^\d\-]+/gi.test(inputTel.value)) {
-
-      } else {
-        alert("Телефон не верный!");
-        isError = true;
-      }
-
-      if (isError == true) {
-        alert("Заполните данные верно!");
+      if (e.target == inputTel) {
+        e.target.value = e.target.value.replace(/[^\d\-()]+/gi, "");
       }
     });
   });
 
-  footerForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+  footerForm.addEventListener("input", function (e) {
 
-    let isError = false;
     const inputText = this.querySelector('input[type=text]');
     const inputEmail = this.querySelector('input[type=email]');
     const inputTel = this.querySelector('input[type=tel]');
 
-
-    if (!/[^а-яА-Я\-]/gi.test(inputText.value) && inputText.value !== '') {
-
-    } else {
-      alert("Ввод неверный!");
-      isError = true;
+    if (e.target == inputText) {
+      e.target.value = e.target.value.replace(/[^а-яА-Я\-' ']/gi, "");
     }
 
-    if (/\w+@([\w]+\.)[\w]+/gi.test(inputEmail.value)) {
-
-    } else {
-      alert("Email неверный!");
-      isError = true;
+    if (e.target == inputEmail) {
+      e.target.value = e.target.value.replace(/[^\w\@-_.!~*']+/, "");
     }
 
-    if (!/[^\d\-]+/gi.test(inputTel.value)) {
-
-    } else {
-      alert("Телефон не верный!");
-      isError = true;
-    }
-
-    if (isError == true) {
-      alert("Данные введены неверно!");
+    if (e.target == inputTel) {
+      e.target.value = e.target.value.replace(/[^\d\-()]+/gi, "");
     }
   });
+
 
   const inputTexts = document.querySelectorAll('input[type=text]');
 
