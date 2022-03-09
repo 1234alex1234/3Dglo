@@ -5,6 +5,7 @@ import regex from "./modules/regex";
 import tabs from "./modules/tabs";
 import slider from "./modules/slider";
 import calc from "./modules/calc";
+import promis from "./modules/promis";
 
 menu();
 modal();
@@ -13,3 +14,4 @@ regex();
 tabs();
 slider();
 calc(100);
+promis();
