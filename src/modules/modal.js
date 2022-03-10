@@ -13,13 +13,11 @@ const modalFunc = () => {
 
     btn.addEventListener("click", () => {
       const popupContentWidth = popupContent.clientWidth;
-      console.log(popupContentWidth);
-
 
       modal.style.display = 'block';
 
       animate({
-        duration: 1000,
+        duration: 400,
         timing(timeFraction) {
           return timeFraction;
         },
