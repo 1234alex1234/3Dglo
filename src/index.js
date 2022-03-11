@@ -5,7 +5,7 @@ import regex from "./modules/regex";
 import tabs from "./modules/tabs";
 import slider from "./modules/slider";
 import calc from "./modules/calc";
-import promis from "./modules/promis";
+import sendForm from "./modules/sendForm";
 
 menu();
 modal();
@@ -14,4 +14,4 @@ regex();
 tabs();
 slider();
 calc(100);
-promis();
+sendForm('#form1');
