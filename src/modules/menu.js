@@ -7,8 +7,6 @@ const menuFunc = () => {
 
 
   const toggleMenu = (e) => {
-    e.preventDefault();
-
     if (e.target.closest('.menu')) {
       menu.classList.toggle('active-menu');
     }
@@ -18,12 +16,11 @@ const menuFunc = () => {
     }
 
     menuLinks.forEach(function (menuLink) {
+
       if (e.target == menuLink) {
+        e.preventDefault();
         const id = menuLink.getAttribute('href');
 
-        if (id == '#service-block') {
-          e.preventDefault();
-        }
 
         document.querySelector(id).scrollIntoView({
           behavior: 'smooth',
@@ -33,6 +30,8 @@ const menuFunc = () => {
     });
 
     if (e.target.closest('a')) {
+      e.preventDefault();
+
       const id = e.target.closest('a').getAttribute('href');
 
       document.querySelector(id).scrollIntoView({
@@ -42,7 +41,7 @@ const menuFunc = () => {
     }
   };
 
-  document.addEventListener("click", toggleMenu);
+  document.addEventListener("click", toggleMenu, true);
 };
 
 export default menuFunc;

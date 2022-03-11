@@ -1,15 +1,107 @@
-const sendFormFunc = (formId) => {
+const sendFormFunc = ({
+  formId1,
+  formId2,
+  formId3,
+  someElem = []
+}) => {
 
-  const form = document.querySelector(formId);
+  const form1 = document.querySelector(formId1);
+  const form2 = document.querySelector(formId2);
+  const form3 = document.querySelector(formId3);
+  const stutusBlock = document.createElement('div');
+  const loadText = 'Загрузка...';
+  const errorText = 'Ошибка...';
+  const successText = 'Наш менеджер с Вами свяжется!';
 
-  console.log(form);
+  const validate = (lists) => {
+    let isError = false;
 
-  form.addEventListener('submit', function (event) {
-    console.log(form);
-    event.preventDefault();
+    lists.forEach(list => {
+      if (!list.classList.contains('mess')) {
+        if (list.type === 'text') {
+          if (!/[^а-яА-Я\-' ']/gi.test(list.value) && list.value !== '') {
 
-    console.log("submit");
-  });
+          } else {
+            isError = true;
+          }
+        }
+
+        if (list.type === 'email') {
+          if (/\w+@([\w]+\.)[\w]+/gi.test(list.value)) {
+
+          } else {
+            isError = true;
+          }
+        }
+
+        if (list.type === 'tel') {
+          if (!/[^\d\-]+/gi.test(list.value)) {
+
+          } else {
+            isError = true;
+          }
+        }
+      }
+    });
+
+    return isError;
+  };
+
+  function submitForm(e) {
+    e.preventDefault();
+
+    const formElements = this.querySelectorAll('input');
+    let formData = new FormData(this);
+    let formBody = {};
+
+    formData.forEach((val, key) => {
+      formBody[key] = val;
+    });
+
+    someElem.forEach(elem => {
+      const element = document.getElementById(elem.id);
+
+      if (elem.type === 'block') {
+        formBody[elem.id] = element.textContent;
+      } else if (elem.type === 'value') {
+        formBody[elem.id] = element.value;
+      }
+    });
+
+    stutusBlock.textContent = loadText;
+    form1.append(stutusBlock);
+
+    if (!validate(formElements)) {
+      sendData(formBody).then(data => {
+        stutusBlock.textContent = successText;
+        formElements.forEach(elem => {
+          elem.value = '';
+        });
+      }).catch(error => {
+        stutusBlock.textContent = errorText;
+      });
+    } else {
+      alert("Данные не валидны!");
+    }
+  };
+
+
+  const sendData = (data) => {
+    return fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+
+    }).then(res => res.json());
+  };
+
+  form1.addEventListener('submit', submitForm);
+
+  form2.addEventListener('submit', submitForm);
+
+  form3.addEventListener('submit', submitForm);
 };
 
 export default sendFormFunc;

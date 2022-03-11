@@ -10,8 +10,16 @@ import sendForm from "./modules/sendForm";
 menu();
 modal();
 timer('15 march 2022');
-regex();
+// regex();
 tabs();
 slider();
 calc(100);
-sendForm('#form1');
+sendForm({
+  formId1: '#form1',
+  formId2: '#form2',
+  formId3: '#form3',
+  someElem: [{
+    type: 'block',
+    id: 'total',
+  }]
+});
