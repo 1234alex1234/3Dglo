@@ -10,7 +10,7 @@ import sendForm from "./modules/sendForm";
 menu();
 modal();
 timer('15 march 2022');
-// regex();
+regex();
 tabs();
 slider();
 calc(100);
