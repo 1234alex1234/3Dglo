@@ -43,6 +43,7 @@ const sendFormFunc = ({
         }
       }
 
+      //======================================
       if (list.name == 'user_message') {
         if (/[а-яА-Я\!,.?]+/.test(list.value)) {
 
@@ -51,6 +52,7 @@ const sendFormFunc = ({
         }
       }
 
+      //=====================================
     });
 
     return isError;
