@@ -12,36 +12,45 @@ const sendFormFunc = ({
   const loadText = 'Загрузка...';
   const errorText = 'Ошибка...';
   const successText = 'Наш менеджер с Вами свяжется!';
+  const forms = document.querySelectorAll('form');
 
   const validate = (lists) => {
     let isError = false;
 
     lists.forEach(list => {
-      if (!list.classList.contains('mess')) {
-        if (list.type === 'text') {
-          if (!/[^а-яА-Я\-' ']/gi.test(list.value) && list.value !== '') {
 
-          } else {
-            isError = true;
-          }
-        }
+      if (list.type === 'text') {
+        if (!/[^а-яА-Я\-' ']/gi.test(list.value) && list.value !== '') {
 
-        if (list.type === 'email') {
-          if (/\w+@([\w]+\.)[\w]+/gi.test(list.value)) {
-
-          } else {
-            isError = true;
-          }
-        }
-
-        if (list.type === 'tel') {
-          if (!/[^\d\-]+/gi.test(list.value)) {
-
-          } else {
-            isError = true;
-          }
+        } else {
+          isError = true;
         }
       }
+
+      if (list.type === 'email') {
+        if (/\w+@([\w]+\.)[\w]+/gi.test(list.value)) {
+
+        } else {
+          isError = true;
+        }
+      }
+
+      if (list.type === 'tel') {
+        if (!/[^\d\-+()]+/gi.test(list.value)) {
+
+        } else {
+          isError = true;
+        }
+      }
+
+      if (list.name == 'user_message') {
+        if (/[а-яА-Я\!,.?]+/.test(list.value)) {
+
+        } else {
+          isError = true;
+        }
+      }
+
     });
 
     return isError;
@@ -69,7 +78,8 @@ const sendFormFunc = ({
     });
 
     stutusBlock.textContent = loadText;
-    form1.append(stutusBlock);
+    stutusBlock.style.color = 'white';
+    this.append(stutusBlock);
 
     if (!validate(formElements)) {
       sendData(formBody).then(data => {
@@ -97,11 +107,9 @@ const sendFormFunc = ({
     }).then(res => res.json());
   };
 
-  form1.addEventListener('submit', submitForm);
-
-  form2.addEventListener('submit', submitForm);
-
-  form3.addEventListener('submit', submitForm);
+  forms.forEach(form => {
+    form.addEventListener('submit', submitForm);
+  });
 };
 
 export default sendFormFunc;

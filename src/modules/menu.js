@@ -3,8 +3,6 @@ const menuFunc = () => {
   const menuBtn = document.querySelector(".menu");
   const menu = document.querySelector('menu');
   const menuLinks = menu.querySelectorAll('ul>li>a');
-  const serviceLink = document.querySelector('a[href="#service-block"]');
-
 
   const toggleMenu = (e) => {
     if (e.target.closest('.menu')) {
@@ -29,7 +27,7 @@ const menuFunc = () => {
       }
     });
 
-    if (e.target.closest('a')) {
+    if (e.target.closest('a[href="#service-block"]')) {
       e.preventDefault();
 
       const id = e.target.closest('a').getAttribute('href');
