@@ -9,10 +9,6 @@ const menuFunc = () => {
       menu.classList.toggle('active-menu');
     }
 
-    if (e.target.classList.contains('close-btn') || (!e.target.closest('.menu'))) {
-      menu.classList.remove('active-menu');
-    }
-
     menuLinks.forEach(function (menuLink) {
 
       if (e.target == menuLink) {
@@ -36,6 +32,13 @@ const menuFunc = () => {
         behavior: 'smooth',
         block: 'start'
       });
+    }
+
+    if (e.target.classList.contains('close-btn') || (!e.target.closest('.menu'))) {
+      if (e.target.classList.contains('close-btn')) {
+        e.preventDefault();
+      }
+      menu.classList.remove('active-menu');
     }
   };
 

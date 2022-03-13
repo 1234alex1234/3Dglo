@@ -13,6 +13,7 @@ const sendFormFunc = ({
   const errorText = 'Ошибка...';
   const successText = 'Наш менеджер с Вами свяжется!';
   const forms = document.querySelectorAll('form');
+  const modal = document.querySelector('.popup');
 
   const validate = (lists) => {
     let isError = false;
@@ -58,6 +59,14 @@ const sendFormFunc = ({
     return isError;
   };
 
+  const clearStatus = () => {
+    stutusBlock.textContent = '';
+  };
+
+  const popupClose = () => {
+    modal.style.display = 'none';
+  };
+
   function submitForm(e) {
     e.preventDefault();
 
@@ -88,15 +97,17 @@ const sendFormFunc = ({
         stutusBlock.textContent = successText;
         formElements.forEach(elem => {
           elem.value = '';
+          setTimeout(popupClose, 3500);
+          setTimeout(clearStatus, 3500);
         });
       }).catch(error => {
         stutusBlock.textContent = errorText;
+        setTimeout(clearStatus, 3500);
       });
     } else {
       alert("Данные не валидны!");
     }
   };
-
 
   const sendData = (data) => {
     return fetch('https://jsonplaceholder.typicode.com/posts', {

@@ -30,6 +30,7 @@ const modalFunc = () => {
 
   const handlePopup = (e) => {
     if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+      e.preventDefault();
       modal.style.display = 'none';
     }
   };
